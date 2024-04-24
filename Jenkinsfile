@@ -1,20 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Install Node.js and npm') {
             steps {
-                sh 'npm install'
+                sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash'
+                sh 'source ~/.bashrc'
+                sh 'nvm install node' // Installs the latest version of Node.js
             }
         }
-        stage('Test') {
-            steps {
-                sh 'npm test'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'npm run deploy'
-            }
-        }
+        // Other stages of your pipeline
     }
 }
